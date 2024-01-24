@@ -42,9 +42,9 @@ function subStockView($param)
 						<?php
 						for ($i = 0; $i < 4; $i++) {
 						?>
-							<input type="checkbox" name="sDistance[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 4; $j++) {
-																											if ($param["sDistance"][$j] == $i + 1) print ' checked="checked"';
-																										} ?> /> <?php print fnRankName($i) ?>
+							<input type="checkbox" name="sDistance[]" value="<?php print $i; ?>" <?php for ($j = 0; $j < 4; $j++) {
+																										if (isset($param["sDistance"][$j]) && ($param["sDistance"][$j] == $i)) print ' checked="checked"';
+																									} ?> /> <?php print fnRankName($i) ?>
 						<?php
 						}
 						?>
@@ -62,9 +62,9 @@ function subStockView($param)
 						<?php
 						for ($i = 0; $i < 5; $i++) {
 						?>
-							<input type="checkbox" name="sRank[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 5; $j++) {
-																										if ($param["sRank"][$j] == $i + 1) print ' checked="checked"';
-																									} ?> /> <?php print fnRankName($i) ?>
+							<input type="checkbox" name="sRank[]" value="<?php print $i; ?>" <?php for ($j = 0; $j < 5; $j++) {
+																									if (isset($param["sRank"][$j]) && ($param["sRank"][$j] == $i)) print ' checked="checked"';
+																								} ?> /> <?php print fnRankName($i) ?>
 						<?php
 						}
 						?>
@@ -96,9 +96,9 @@ function subStockView($param)
 						<?php
 						for ($i = 0; $i < 6; $i++) {
 						?>
-							<input type="checkbox" name="sHow[]" value="<?php print $i + 1; ?>" <?php for ($j = 0; $j < 6; $j++) {
-																									if ($param["sHow"][$j] == $i + 1) print ' checked="checked"';
-																								} ?> /> <?php print fnHowName($i); ?>
+							<input type="checkbox" name="sHow[]" value="<?php print $i; ?>" <?php for ($j = 0; $j < 6; $j++) {
+																								if (isset($param["sHow"][$j]) && ($param["sHow"][$j] == $i)) print ' checked="checked"';
+																							} ?> /> <?php print fnHowName($i); ?>
 						<?php
 							if ($i == 2) {
 								print "<br />\n";
