@@ -103,7 +103,7 @@ function subConst()
 				<th class="list_head">工事金額<?php fnOrder('CONSTPRICE', 'constSearch') ?></th>
 				<th class="list_head">追加工事<?php fnOrder('CONSTADD', 'constSearch') ?></th>
 				<th class="list_head">買取決済<?php fnOrder('PURCHASEDT', 'constSearch') ?></th>
-				<th class="list_head">工期<?php fnOrderConstWork('WORKSTARTDT', 'WORKENDDT', 'constSearch') ?></th>
+				<th class="list_head">工期<?php fnOrder('WORKSTARTDT', 'constSearch') ?></th>
 				<th class="list_head">荷&amp;鍵引取<?php fnOrder('RECEIVE', 'constSearch') ?></th>
 				<th class="list_head">電気水道開栓/閉栓<?php fnOrder('LINEOPENDT', 'constSearch') ?></th>
 				<th class="list_head">電気水道開栓/閉栓連絡日<?php fnOrder('LINEOPENCONTACTDT', 'constSearch') ?></th>
