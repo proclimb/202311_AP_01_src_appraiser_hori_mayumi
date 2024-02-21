@@ -20,7 +20,7 @@ function subGuideView($param)
 		<input type="hidden" name="orderTo" value="<?php print $param["orderTo"] ?>" />
 		<input type="hidden" name="sPage" value="<?php print $param["sPage"] ?>" />
 		<input type="hidden" name="guideNo" />
-		<input type="hidden" name="articleNo" />
+		<!-- <input type="hidden" name="articleNo" /> -->
 		<input type="hidden" name="examNo[]" />
 		<input type="hidden" name="purchaseNo[]" />
 
@@ -125,8 +125,7 @@ function subGuideView($param)
 				<th class="list_head">業者名<?php fnOrder('A.NAME', 'guideSearch'); ?></th>
 				<th class="list_head">FAX</th>
 				<th class="list_head">結果</th>
-				<th class="list_head">受付日</th>
-				<th class="list_head">受付</th>
+				<th class="list_head">受付日<br />受付</th>
 				<th class="list_head">鍵詳細</th>
 				<th class="list_head">検討</th>
 				<th class="list_head">買付</th>
@@ -179,8 +178,7 @@ function subGuideView($param)
 					</td>
 					<td class="list_td<?php print $i ?>"><?php print $fax ?></td>
 					<td class="list_td<?php print $i ?>"><?php print $result ?></td>
-					<td class="list_td<?php print $i ?>"><?php print $acceptDT ?></td>
-					<td class="list_td<?php print $i ?>"><?php print $accept ?></td>
+					<td class="list_td<?php print $i ?>"><?php print $acceptDT ?><br /><?php print $accept ?></td>
 					<td class="list_td<?php print $i ?>">
 						<a href="#" onclick="window.open('./index.php?act=guideShowKey&articleNo=<?php print $articleNo ?>','情報詳細','width=500,height=400');return false;">鍵詳細</a>
 					</td>
