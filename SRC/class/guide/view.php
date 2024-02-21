@@ -20,7 +20,7 @@ function subGuideView($param)
 		<input type="hidden" name="orderTo" value="<?php print $param["orderTo"] ?>" />
 		<input type="hidden" name="sPage" value="<?php print $param["sPage"] ?>" />
 		<input type="hidden" name="guideNo" />
-		<!-- <input type="hidden" name="articleNo" /> -->
+		<input type="hidden" name="articleNo" />
 		<input type="hidden" name="examNo[]" />
 		<input type="hidden" name="purchaseNo[]" />
 
@@ -154,7 +154,7 @@ function subGuideView($param)
 
 			?>
 				<tr>
-					<td class="list_td<?php print $i ?>"><?php print fnContentName($content - 1) ?></td>
+					<td class="list_td<?php print $i ?>"><?php print fnContentName($content) ?></td>
 					<td class="list_td<?php print $i ?>">
 						<?php print $guideStartDT ?>
 						<?php
@@ -527,9 +527,9 @@ function subGuideEditView($param)
 					<tr>
 						<th>内容</th>
 						<td colspan="3">
-							<input type="radio" name="<?php print($nameAttr . "[content]") ?>" value="1" checked="checked" /> <?php print fnContentName(0) ?>
+							<input type="radio" name="<?php print($nameAttr . "[content]") ?>" value="0" checked="checked" /> <?php print fnContentName(0) ?>
 							<?php for ($i = 1; $i < 3; $i++) { ?>
-								<input type="radio" name="<?php print($nameAttr . "[content]") ?>" value="<?php print $i + 1 ?>" <?php if ($param["content"] == $i + 1) print ' checked="checked"' ?> /> <?php print fnContentName($i) ?>
+								<input type="radio" name="<?php print($nameAttr . "[content]") ?>" value="<?php print $i ?>" <?php if ($param["content"] == $i) print ' checked="checked"' ?> /> <?php print fnContentName($i) ?>
 							<?php } ?>
 						</td>
 					</tr>
