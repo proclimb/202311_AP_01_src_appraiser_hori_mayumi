@@ -142,3 +142,15 @@ function fnGuideRegistCheck() {
 	form.act.value = 'guideEdit';
 	form.submit();
 }
+
+
+
+/**
+ * 物件検索の検索時案件情報登録候補クリア
+ */
+function fnGuideChoiceSearchRegistClear() {
+	$("#regist tr").find("td").remove()
+
+	form.act.value = 'guideChoiceSearch';
+	form.submit();
+}
