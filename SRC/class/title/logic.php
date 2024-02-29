@@ -87,9 +87,12 @@ function subFTitleEditComplete()
     $param["classNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['classNo']);
     $param["seqNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['seqNo']);
     $param["name"] = mysqli_real_escape_string($param["conn"], $_REQUEST['name']);
-    $param["sClassNo"] = mysqli_real_escape_string($conn, $_REQUEST['sClassNo']);
+    $param["sClassNo"] = mysqli_real_escape_string($param["conn"], $_REQUEST['sClassNo']);
 
     $ErrClassNo = subFTitleRepetition($param["classNo"], $param["DocNo"]);
+    if ($param["seqNo"]) {
+        $ErrSeqNo = subFTitleItemRepetition($param["classNo"], $param["seqNo"], $param["DocNo"]);
+    }
 
     if ($param["DocNo"]) {
         if ($param["seqNo"] == 0) {
@@ -127,9 +130,16 @@ function subFTitleEditComplete()
                 subFTitleMsg($param);
             }
         } else {
-            $sql = fnSqlFTitleUpdate($param);
-            $res = mysqli_query($param["conn"], $sql);
-            subTitlePage1();
+            if (!$ErrSeqNo) {
+                $sql = fnSqlFTitleUpdate($param);
+                $res = mysqli_query($param["conn"], $sql);
+                subTitlePage1();
+            } else {
+                // 重複時
+                $param["purpose"] = '更新';
+                $param["btnImage"] = 'btn_load.png';
+                subFTitleItemMsg($param);
+            }
         }
     } else {
         $param["DocNo"] = fnNextNo('DOC');
@@ -148,9 +158,17 @@ function subFTitleEditComplete()
             }
             subTitlePage0();
         } else {
-            $sql = fnSqlFTitleInsert($param);
-            $res = mysqli_query($param["conn"], $sql);
-            subTitlePage1();
+            if (!$ErrSeqNo) {
+                $sql = fnSqlFTitleInsert($param);
+                $res = mysqli_query($param["conn"], $sql);
+                subTitlePage1();
+            } else {
+                // 重複時
+                $param["DocNo"] = "";
+                $param["purpose"] = '登録';
+                $param["btnImage"] = 'btn_enter.png';
+                subFTitleItemMsg($param);
+            }
         }
     }
 }
@@ -263,6 +281,24 @@ function subFTitleRepetition($classNo, $DocNo)
 }
 
 //
+// 項目名重複チェック
+//
+function subFTitleItemRepetition($classNo, $seqNo, $DocNo)
+{
+    $conn = fnDbConnect();
+
+    $sql = fnSqlFTitleItemRepetition($classNo, $seqNo);
+    $res = mysqli_query($conn, $sql);
+    while ($row = mysqli_fetch_array($res)) {
+        if ($row['CLASSNO'] == $classNo && $row['SEQNO'] == $seqNo) {
+            if ($row['DOCNO'] !== $DocNo) {
+                return $row['SEQNO'];
+            }
+        }
+    }
+}
+
+//
 // エラー表示
 //
 function subFTitleMsg($param)
@@ -277,6 +313,26 @@ function subFTitleMsg($param)
     $_REQUEST['act'] = 'fTitleEdit';
     subMenu();
     subFTitleEditView($param);
+    print "</body>\n</html>";
+    exit();
+}
+
+//
+// エラー表示
+//
+function subFTitleItemMsg($param)
+{
+    $param["seqNoChk"] = "既に登録されている表示順です";
+    $sql = fnSqlFTitleEdit($param["DocNo"]);
+    $res = mysqli_query($param["conn"], $sql);
+    // $param["classNo"] = mysqli_result( $res,0,1 );
+    $row = mysqli_fetch_array($res);
+    $param["classNo"] = $row[1];
+    $param["seqNo"] = $row[2];
+
+    $_REQUEST['act'] = 'fTitleItemEdit';
+    subMenu();
+    subFTitleItemEditView($param);
     print "</body>\n</html>";
     exit();
 }

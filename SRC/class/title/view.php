@@ -192,7 +192,7 @@ function subFTitleItemEditView($param)
                     <th>タイトル</th>
                     <td class="f16">
                         <?php
-                        $sql = fnSqlFTitleEdit($param["sDocNo"]);
+                        $sql = fnSqlFTitleClassNoEdit($param["sClassNo"]);
                         $res = mysqli_query($param["conn"], $sql);
                         $row = mysqli_fetch_array($res);
                         print htmlspecialchars($row[3]);
@@ -202,7 +202,13 @@ function subFTitleItemEditView($param)
                 </tr>
                 <tr>
                     <th>表示順<span class="red">（必須）</span></th>
-                    <td><input type="text" name="seqNo" value="<?php print $param["seqNo"]; ?>" /></td>
+                    <td><input type="text" name="seqNo" value="<?php print $param["seqNo"]; ?>" />
+                        <?php
+                        if ($param["seqNoChk"]) {
+                            print "<span class=\"red\" algin=\"right\">" . $param["seqNoChk"] . "</span>";
+                        }
+                        ?>
+                    </td>
                 </tr>
                 <tr>
                     <th>名前<span class="red">（必須）</span></th>

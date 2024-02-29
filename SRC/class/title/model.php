@@ -63,7 +63,7 @@ function fnSqlFTitleInsert($param)
     $sql .= "DocNo,classNo,seqNo,name,INSDT,UPDT,DEL";
     $sql .= ")VALUES(";
     $sql .= "'" . $param["DocNo"] . "','" . $param["classNo"] . "','" . $param["seqNo"] . "','" . $param["name"] . "',"
-                . "CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
+        . "CURRENT_TIMESTAMP,CURRENT_TIMESTAMP,1)";
 
     return $sql;
 }
@@ -89,6 +89,31 @@ function fnSqlFTitleRepetition($classNo)
     $select = "SELECT DOCNO,CLASSNO,SEQNO,NAME";
     $from = " FROM TBLDOC";
     $where = " WHERE DEL = 1 AND CLASSNO = '$classNo'";
+
+    return $select . $from . $where;
+}
+
+//
+// 項目名抽出
+//
+function fnSqlFTitleItemRepetition($classNo, $seqNo)
+{
+    $select = "SELECT DOCNO,CLASSNO,SEQNO,NAME";
+    $from = " FROM TBLDOC";
+    $where = " WHERE DEL = 1 AND CLASSNO = '$classNo' AND SEQNO = '$seqNo'";
+
+    return $select . $from . $where;
+}
+
+//
+// タイトル管理情報クラス番号抽出
+//
+function fnSqlFTitleClassNoEdit($classNo)
+{
+    $select = "SELECT DOCNO,CLASSNO,SEQNO,NAME";
+    $from = " FROM TBLDOC";
+    $where = " WHERE DEL = 1";
+    $where .= " AND CLASSNO = '$classNo' AND SEQNO = 0";
 
     return $select . $from . $where;
 }
