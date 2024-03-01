@@ -150,7 +150,11 @@ function subFTitleEditView($param)
                 </tr>
                 <tr>
                     <th>名前<span class="red">（必須）</span></th>
-                    <td><input type="text" name="name" value="<?php print $param["name"]; ?>" /></td>
+                    <td><input type="text" name="name" value="<?php if ($param["classNoChk"]) {
+                                                                    print htmlspecialchars($param["name"]);
+                                                                } else {
+                                                                    print $param["name"];
+                                                                } ?>" /></td>
                 </tr>
             </table>
 
@@ -212,7 +216,11 @@ function subFTitleItemEditView($param)
                 </tr>
                 <tr>
                     <th>名前<span class="red">（必須）</span></th>
-                    <td><input type="text" name="name" value="<?php print $param["name"]; ?>" /></td>
+                    <td><input type="text" name="name" value="<?php if ($param["seqNoChk"]) {
+                                                                    print htmlspecialchars($param["name"]);
+                                                                } else {
+                                                                    print $param["name"];
+                                                                } ?>" /></td>
                 </tr>
             </table>
         </div>
